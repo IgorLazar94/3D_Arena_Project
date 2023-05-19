@@ -8,7 +8,7 @@ public class MobileInput : MonoBehaviour
     public JoyStick MovejoyStick;
     public JoyStick LookjoyStick;
 
-    void Update()
+    private void Update()
     {
         var fps = GetComponent<CharacterControl>();
         fps.RunAxis = MovejoyStick.InputDirection;

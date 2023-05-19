@@ -8,9 +8,8 @@ public class JoyStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
 
     public Vector3 InputDirection;
 
-    void Start()
+    private void Start()
     {
-
         jsContainer = GetComponent<Image>();
         joystick = transform.GetChild(0).GetComponent<Image>(); 
         InputDirection = Vector3.zero;
@@ -30,8 +29,8 @@ public class JoyStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
         position.x = (position.x / jsContainer.rectTransform.sizeDelta.x);
         position.y = (position.y / jsContainer.rectTransform.sizeDelta.y);
 
-        float x = (jsContainer.rectTransform.pivot.x == 1f) ? position.x * 2 + 1 : position.x * 2 - 1;
-        float y = (jsContainer.rectTransform.pivot.y == 1f) ? position.y * 2 + 1 : position.y * 2 - 1;
+        //float x = (jsContainer.rectTransform.pivot.x == 1f) ? position.x * 2 + 1 : position.x * 2 - 1;
+        //float y = (jsContainer.rectTransform.pivot.y == 1f) ? position.y * 2 + 1 : position.y * 2 - 1;
 
         InputDirection = new Vector3(position.x * 2 + 0, position.y * 2);
         InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
