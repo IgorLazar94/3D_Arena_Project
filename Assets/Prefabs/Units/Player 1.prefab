@@ -330,6 +330,8 @@ MonoBehaviour:
   bulletSpawnPos: {fileID: 4965562383500628}
   cameraObject: {fileID: 20843365961813176}
   projectileContainer: {fileID: 0}
+  uiManager: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!54 &1838619889
 Rigidbody:
   m_ObjectHideFlags: 0

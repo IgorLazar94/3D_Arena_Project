@@ -11,6 +11,8 @@ public class PlayerController : Unit
     [SerializeField] private Transform bulletSpawnPos;
     [SerializeField] private Camera cameraObject;
     [SerializeField] private Transform projectileContainer;
+    [SerializeField] private UIManager uiManager;
+    [SerializeField] private GameManager gameManager;
     private int currentHealthPoints;
     private int currentEnergy;
     private float bulletSpeed = 50.0f;
@@ -18,6 +20,8 @@ public class PlayerController : Unit
     private void Start()
     {
         SetDefaultStats();
+        uiManager.UpdateHealthBar(currentHealthPoints);
+        uiManager.UpdateEnergyBar(currentEnergy);
     }
 
     private void SetDefaultStats()
@@ -60,18 +64,20 @@ public class PlayerController : Unit
         }
         currentEnergy += bonusEnergy;
         currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
+        uiManager.UpdateEnergyBar(currentEnergy);
     }
 
     private void RemoveHealthPoint()
     {
         currentHealthPoints -= damage;
         currentHealthPoints = Mathf.Clamp(currentHealthPoints, 0, maxHealthPoints);
+        uiManager.UpdateHealthBar(currentHealthPoints);
     }
-    private void UpdateHealthPoint(int addHp)
+    private void AddHealthPoint(int addHp)
     {
         currentHealthPoints += addHp;
-
         currentHealthPoints = Mathf.Clamp(currentHealthPoints, 0, maxHealthPoints);
+        uiManager.UpdateHealthBar(currentHealthPoints);
     }
 
     public void PlayerGetDamage()
@@ -91,15 +97,12 @@ public class PlayerController : Unit
 
     }
 
-    //private void OnTriggerEnter(Collider collision)
-    //{
-    //    if (collision.gameObject.tag == "Enemy")
-    //    {
-    //        if (collision.gameObject.GetComponent<RedEnemy>() != null)
-    //        {
-    //            PlayerGetDamage();
-    //        }
-    //    }
-    //}
+    public void UseUltimate()
+    {
+        if (currentEnergy >= maxEnergy)
+        {
+            gameManager.DestroyAllEnemies();
+        }
+    }
 
 }

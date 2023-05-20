@@ -5,40 +5,53 @@ using UnityEngine.UI;
 using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] Image Aim;
-
-    [SerializeField] Image HealthBarFull;
-    [SerializeField] Image EnergyBarFull;
-    private float coefficientDamage;
+    [SerializeField] Image aim;
+    [SerializeField] Image healthBarFull;
+    [SerializeField] Image energyBarFull;
+    //[SerializeField] GameObject pauseModePanel;
+    //[SerializeField] GameObject playModePanel;
+    private float coefficientHealth;
     private float coefficientEnergy;
     private float maxHP;
-    private float hp;
     private float maxEnergy;
-    private float energy;
+
+
+    private void Start()
+    {
+        GetDefaultStates();
+        CalculateHealthBar();
+        CalculateEnergyBar();
+    }
 
     public void CalculateHealthBar()
     {
-        coefficientDamage = HealthBarFull.fillAmount / maxHP;
-    }
-
-    public void UpdateHealthBar()
-    {
-        HealthBarFull.fillAmount -= coefficientDamage * hp;
+        coefficientHealth = healthBarFull.fillAmount / maxHP;
     }
 
     public void CalculateEnergyBar()
     {
-        coefficientEnergy = EnergyBarFull.fillAmount / maxEnergy;
+        coefficientEnergy = energyBarFull.fillAmount / maxEnergy;
     }
 
-    public void UpdateEnergyBar()
+    public void UpdateHealthBar(float hp)
     {
-        EnergyBarFull.fillAmount -= coefficientEnergy * energy;
+        healthBarFull.fillAmount = coefficientHealth * hp;
+    }
+
+    public void UpdateEnergyBar(float energy)
+    {
+        energyBarFull.fillAmount = coefficientEnergy * energy;
     }
 
     public void MoveAim()
     {
+        aim.gameObject.transform.DOScale(1.2f, 0.25f).OnComplete(() => transform.DOScale(1.0f, 0.25f));
+    }
 
+    private void GetDefaultStates()
+    {
+        maxHP = GameSettings.Instance.GetMaxPlayerHealth();
+        maxEnergy = GameSettings.Instance.GetMaxEnergy();
     }
 
 

@@ -51,7 +51,6 @@ public class EnemyBlueProjectile : MonoBehaviour
     {
         if (other.gameObject.tag == TagList.Player)
         {
-            Debug.Log("blue bullet Trigger");
             other.gameObject.GetComponent<PlayerController>().UpdateEnergy(-energyDamage);
             DestroyBullet();
         }
