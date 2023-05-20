@@ -6,8 +6,9 @@ public class RedEnemy : Enemy {
 
     private int currentHealthPoints;
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
         SetDefaultState();
     }
 
@@ -18,4 +19,6 @@ public class RedEnemy : Enemy {
         damage = GameSettings.Instance.GetDamageRedEnemy();
         rewardEnergy = GameSettings.Instance.GetRewardEnergyRed();
     }
+
+   
 }
