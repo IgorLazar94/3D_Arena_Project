@@ -27,6 +27,9 @@ public class GameSettings : MonoBehaviour {
     [SerializeField] private int maxHealthRed;
     [SerializeField] private int getDamageRed;
     [SerializeField] private int rewardEnergyRed;
+    [SerializeField] private float heightToUp;
+    [SerializeField] private float timeToUp;
+    [SerializeField] private float flySpeed;
 
 
     // Player Stats
@@ -69,6 +72,18 @@ public class GameSettings : MonoBehaviour {
     public int GetRewardEnergyRed()
     {
         return rewardEnergyRed;
+    }
+    public float GetHeightToUp()
+    {
+        return heightToUp;
+    }
+    public float GetTimeToUp()
+    {
+        return timeToUp;
+    }
+    public float GetFlySpeed()
+    {
+        return flySpeed;
     }
 
 

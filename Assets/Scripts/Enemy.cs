@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : Unit {
 
     protected int currentHealthPoints;
-    private Player player;
+    protected Player player;
 	protected int rewardEnergy { get; set; }
 
     protected void Start()
@@ -19,9 +19,9 @@ public class Enemy : Unit {
         transform.LookAt(player.gameObject.transform);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == TagList.Bullet)
         {
             EnemyGetDamage();
         }
@@ -33,13 +33,19 @@ public class Enemy : Unit {
         Debug.Log(currentHealthPoints + " enemy HP");
         if (currentHealthPoints <= 0)
         {
-            EnemyDies();
+            EnemyDieFromPlayer();
         }
     }
 
-    private void EnemyDies()
+    private void EnemyDieFromPlayer()
     {
         player.UpdateEnergy(rewardEnergy);
+        EnemyDie();
+    }
+
+    protected void EnemyDie()
+    {
+        Destroy(gameObject);
     }
 
 }

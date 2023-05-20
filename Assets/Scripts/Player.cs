@@ -64,7 +64,7 @@ public class Player : Unit
         currentHealthPoints = Mathf.Clamp(currentHealthPoints, 0, maxHealthPoints);
     }
 
-    private void PlayerGetDamage()
+    public void PlayerGetDamage()
     {
         UpdateHealthPoint();
         Debug.Log(currentHealthPoints + "player HP");
@@ -81,15 +81,15 @@ public class Player : Unit
 
     }
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            if (collision.gameObject.GetComponent<RedEnemy>() != null)
-            {
-                PlayerGetDamage();
-            }
-        }
-    }
+    //private void OnTriggerEnter(Collider collision)
+    //{
+    //    if (collision.gameObject.tag == "Enemy")
+    //    {
+    //        if (collision.gameObject.GetComponent<RedEnemy>() != null)
+    //        {
+    //            PlayerGetDamage();
+    //        }
+    //    }
+    //}
 
 }
