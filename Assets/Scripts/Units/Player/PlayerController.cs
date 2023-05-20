@@ -54,19 +54,29 @@ public class PlayerController : Unit
 
     public void UpdateEnergy(int bonusEnergy)
     {
+        if (bonusEnergy < 0)
+        {
+            Debug.Log("energy damage");
+        }
         currentEnergy += bonusEnergy;
         currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
     }
 
-    private void UpdateHealthPoint()
+    private void RemoveHealthPoint()
     {
         currentHealthPoints -= damage;
+        currentHealthPoints = Mathf.Clamp(currentHealthPoints, 0, maxHealthPoints);
+    }
+    private void UpdateHealthPoint(int addHp)
+    {
+        currentHealthPoints += addHp;
+
         currentHealthPoints = Mathf.Clamp(currentHealthPoints, 0, maxHealthPoints);
     }
 
     public void PlayerGetDamage()
     {
-        UpdateHealthPoint();
+        RemoveHealthPoint();
         Debug.Log(currentHealthPoints + "player HP");
 
 
