@@ -10,10 +10,10 @@ public class BlueEnemy : Enemy {
     private new void Start()
 	{
 		base.Start();
-		SetDefaultState();
+		SetDefaultStates();
     }
 
-    private void SetDefaultState()
+    private void SetDefaultStates()
 	{
 		maxHealthPoints = GameSettings.Instance.GetMaxHealhBlueEnemy();
 		currentHealthPoints = maxHealthPoints;

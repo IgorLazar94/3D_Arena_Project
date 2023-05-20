@@ -8,11 +8,10 @@ public class RedEnemy : Enemy {
     private new void Start()
     {
         base.Start();
-        SetDefaultState();
-
+        SetDefaultStates();
     }
 
-    private void SetDefaultState()
+    private void SetDefaultStates()
     {
         maxHealthPoints = GameSettings.Instance.GetMaxHealhRedEnemy();
         currentHealthPoints = maxHealthPoints;
@@ -20,5 +19,5 @@ public class RedEnemy : Enemy {
         rewardEnergy = GameSettings.Instance.GetRewardEnergyRed();
     }
 
-    
+   
 }
