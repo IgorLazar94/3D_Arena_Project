@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
 
-public class Player : Unit
+public class PlayerController : Unit
 {
 
     [SerializeField] private int maxEnergy;
-    [SerializeField] private Projectile bulletPrefab;
+    [SerializeField] private PlayerProjectile bulletPrefab;
     [SerializeField] private Transform bulletSpawnPos;
     [SerializeField] private Camera cameraObject;
     [SerializeField] private Transform projectileContainer;

@@ -2,32 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Unit {
+public class GenericEnemy : Unit {
 
     protected int currentHealthPoints;
-    protected Player player;
+    protected PlayerController player;
 	protected int rewardEnergy { get; set; }
 
     protected void Start()
 	{
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<PlayerController>();
 
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         transform.LookAt(player.gameObject.transform);
     }
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.tag == TagList.Bullet)
-        {
-            EnemyGetDamage();
-        }
-    }
-
-    private void EnemyGetDamage()
+    protected void EnemyGetDamage()
     {
         currentHealthPoints -= damage;
         Debug.Log(currentHealthPoints + " enemy HP");

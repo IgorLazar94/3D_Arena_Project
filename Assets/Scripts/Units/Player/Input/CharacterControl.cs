@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterControl : MonoBehaviour
 {
-    public float walkingSpeed = 7.5f;
+    public float walkingSpeed;
     public float runningSpeed = 11.5f;
     public float gravity = 20.0f;
     public Camera playerCamera;
@@ -49,7 +49,7 @@ public class CharacterControl : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-
+        walkingSpeed = GameSettings.Instance.GetPlayerSpeed();
         //footsteps.Volum_max = walk_volum_max;
         //footsteps.Volum_min = walk_volum_min;
         //footsteps.step_Distance = walk_step_distance;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class RedEnemy : Enemy {
+public class RedEnemy : GenericEnemy {
 
     private float heightToUp;
     private float timeToUp;
@@ -33,8 +33,9 @@ public class RedEnemy : Enemy {
         transform.DOMoveY(heightToUp, timeToUp).SetEase(Ease.Linear).OnComplete(() => isReadyToFly = true);
     }
 
-    private void FixedUpdate()
+    private new void FixedUpdate()
     {
+        base.FixedUpdate();
         if (isReadyToFly)
         {
             FlyToPlayer();
@@ -59,7 +60,7 @@ public class RedEnemy : Enemy {
         }
     }
 
-    private void RedEnemyFindPlayer(Player player)
+    private void RedEnemyFindPlayer(PlayerController player)
     {
         Debug.Log("red enemy find player");
         player.PlayerGetDamage();
@@ -68,9 +69,14 @@ public class RedEnemy : Enemy {
 
     private void OnTriggerEnter(Collider collision)
     {
+        if (collision.gameObject.tag == TagList.Bullet)
+        {
+            EnemyGetDamage();
+        }
+
         if (collision.gameObject.tag == TagList.Player)
         {
-            RedEnemyFindPlayer(collision.GetComponent<Player>());
+            RedEnemyFindPlayer(collision.GetComponent<PlayerController>());
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.Analytics;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Player player;
+    [SerializeField] private PlayerController player;
     [SerializeField] private BlueEnemy blueEnemy;
     [SerializeField] private RedEnemy redEnemy;
 
