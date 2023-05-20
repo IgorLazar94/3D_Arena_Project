@@ -5,14 +5,21 @@ using UnityEngine;
 
 public class MobileInput : MonoBehaviour
 {
-    public JoyStick MovejoyStick;
-    public JoyStick LookjoyStick;
+    public JoyStick MovementJoyStick;
+    public JoyStick LookedJoystick;
 
-    private void Update()
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         var fps = GetComponent<CharacterControl>();
-        fps.RunAxis = MovejoyStick.InputDirection;
-        fps.LookAxis = LookjoyStick.InputDirection;
+        fps.RunAxis = MovementJoyStick.InputDirection;
+        fps.LookAxis = LookedJoystick.InputDirection;
 
     }
 }
