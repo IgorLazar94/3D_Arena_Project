@@ -11,11 +11,11 @@ public class CharacterControl : MonoBehaviour
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
     public float jumpHeight = 3f;
-    private float normalSpeed = 7.5f;
-    private float crouchSpeed = 4.0f;
+    //private float normalSpeed = 7.5f;
+    //private float crouchSpeed = 4.0f;
 
-    private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
-    private Vector3 playerScale = new Vector3(1, 1, 1);
+    //private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
+    //private Vector3 playerScale = new Vector3(1, 1, 1);
 
     [HideInInspector]
     public Vector2 RunAxis;
@@ -29,16 +29,16 @@ public class CharacterControl : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
-    [Header("ButtonAssign")]
-    public GameObject walk_Btn;
-    public GameObject jump_Button;
-    public GameObject crouch_Button;
-    public GameObject stand_button;
+    //[Header("ButtonAssign")]
+    //public GameObject walk_Btn;
+    //public GameObject jump_Button;
+    //public GameObject crouch_Button;
+    //public GameObject stand_button;
 
     //private Footsteps footsteps;
-    private float walk_volum_min = 0.2f;
-    private float walk_volum_max = 0.6f;
-    private float walk_step_distance = 0.4f;
+    //private float walk_volum_min = 0.2f;
+    //private float walk_volum_max = 0.6f;
+    //private float walk_step_distance = 0.4f;
 
     private void Awake()
     {
@@ -88,38 +88,38 @@ public class CharacterControl : MonoBehaviour
         }
     }
 
-    public void Jump()
-    {
-        moveDirection.y = jumpHeight;
-    }
+    //public void Jump()
+    //{
+    //    moveDirection.y = jumpHeight;
+    //}
 
-    public void Run()
-    {
-        walkingSpeed = runningSpeed;
-        walk_Btn.SetActive(true);
-    }
+    //public void Run()
+    //{
+    //    walkingSpeed = runningSpeed;
+    //    walk_Btn.SetActive(true);
+    //}
 
-    public void Walk()
-    {
-        walkingSpeed = normalSpeed;
-        walk_Btn.SetActive(false);
-    }
+    //public void Walk()
+    //{
+    //    walkingSpeed = normalSpeed;
+    //    walk_Btn.SetActive(false);
+    //}
 
-    public void Crouch()
-    {
-        transform.localScale = crouchScale;
-        transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
-        walkingSpeed = crouchSpeed;
-        stand_button.SetActive(true);
-        crouch_Button.SetActive(false);
-    }
+    //public void Crouch()
+    //{
+    //    transform.localScale = crouchScale;
+    //    transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
+    //    walkingSpeed = crouchSpeed;
+    //    stand_button.SetActive(true);
+    //    crouch_Button.SetActive(false);
+    //}
 
-    public void Stand()
-    {
-        transform.localScale = playerScale;
-        transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
-        walkingSpeed = crouchSpeed;
-        stand_button.SetActive(false);
-        crouch_Button.SetActive(true);
-    }
+    //public void Stand()
+    //{
+    //    transform.localScale = playerScale;
+    //    transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+    //    walkingSpeed = crouchSpeed;
+    //    stand_button.SetActive(false);
+    //    crouch_Button.SetActive(true);
+    //}
 }

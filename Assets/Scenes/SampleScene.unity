@@ -310,15 +310,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdeb51831a12c854b94604269d5c87f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPlayer: 0
-  maxEnergyPlayer: 0
-  damagePlayer: 10
-  maxHealthBlue: 0
-  damageBlue: 0
-  rewardEnergyBlue: 0
-  maxHealthRed: 0
-  damageRed: 0
-  rewardEnergyRed: 0
+  maxHealthPlayer: 100
+  maxEnergyPlayer: 100
+  getDamagePlayer: 10
+  maxHealthBlue: 50
+  getDamageBlue: 20
+  rewardEnergyBlue: 50
+  maxHealthRed: 100
+  getDamageRed: 20
+  rewardEnergyRed: 15
 --- !u!4 &115503008
 Transform:
   m_ObjectHideFlags: 0
@@ -734,6 +734,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4835842766314830, guid: 2d7f894be3f3ed34da49638a62a6ea4d, type: 3}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64021866589372820, guid: 2d7f894be3f3ed34da49638a62a6ea4d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64078889222119078, guid: 2d7f894be3f3ed34da49638a62a6ea4d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64113068150807876, guid: 2d7f894be3f3ed34da49638a62a6ea4d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64213212359955092, guid: 2d7f894be3f3ed34da49638a62a6ea4d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64232130617298000, guid: 2d7f894be3f3ed34da49638a62a6ea4d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64268998570440024, guid: 2d7f894be3f3ed34da49638a62a6ea4d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64330449261830056, guid: 2d7f894be3f3ed34da49638a62a6ea4d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64345235085096718, guid: 2d7f894be3f3ed34da49638a62a6ea4d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64410192965213576, guid: 2d7f894be3f3ed34da49638a62a6ea4d,
+        type: 3}
+      propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

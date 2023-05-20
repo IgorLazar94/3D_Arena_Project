@@ -14,18 +14,18 @@ public class GameSettings : MonoBehaviour {
     [Header("PlayerStats")]
     [SerializeField] private int maxHealthPlayer;
     [SerializeField] private int maxEnergyPlayer;
-    [SerializeField] private int damagePlayer;
+    [SerializeField] private int getDamagePlayer;
 
     [Space]
     [Header("BlueEnemyStats")]
     [SerializeField] private int maxHealthBlue;
-    [SerializeField] private int damageBlue;
+    [SerializeField] private int getDamageBlue;
     [SerializeField] private int rewardEnergyBlue;
 
     [Space]
     [Header("RedEnemyStats")]
     [SerializeField] private int maxHealthRed;
-    [SerializeField] private int damageRed;
+    [SerializeField] private int getDamageRed;
     [SerializeField] private int rewardEnergyRed;
 
 
@@ -40,7 +40,7 @@ public class GameSettings : MonoBehaviour {
     }
     public int GetDamagePlayer()
     {
-        return damagePlayer;
+        return getDamagePlayer;
     }
 
     // Blue enemy Stats
@@ -51,7 +51,7 @@ public class GameSettings : MonoBehaviour {
     }
     public int GetDamageBlueEnemy()
     {
-        return damageBlue;
+        return getDamageBlue;
     }
     public int GetRewardEnergyBlue()
     {
@@ -64,7 +64,7 @@ public class GameSettings : MonoBehaviour {
     }
     public int GetDamageRedEnemy()
     {
-        return damageRed;
+        return getDamageRed;
     }
     public int GetRewardEnergyRed()
     {

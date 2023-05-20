@@ -6,7 +6,6 @@ using UnityEngine.Experimental.PlayerLoop;
 
 public class BlueEnemy : Enemy {
 
-	private int currentHealthPoints;
 
     private new void Start()
 	{

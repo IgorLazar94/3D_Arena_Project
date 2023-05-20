@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class RedEnemy : Enemy {
 
-    private int currentHealthPoints;
 
     private new void Start()
     {
         base.Start();
         SetDefaultState();
+
     }
 
     private void SetDefaultState()
@@ -20,5 +20,5 @@ public class RedEnemy : Enemy {
         rewardEnergy = GameSettings.Instance.GetRewardEnergyRed();
     }
 
-   
+    
 }
