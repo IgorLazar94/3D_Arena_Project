@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject pauseModePanel;
     [SerializeField] GameObject playModePanel;
     [SerializeField] GameObject losePanel;
+    [SerializeField] GameObject startPanel;
 
     private float coefficientHealth;
     private float coefficientEnergy;
@@ -24,10 +25,12 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 0;
         GetDefaultStates();
         CalculateHealthBar();
         CalculateEnergyBar();
+
+
     }
 
     public void CalculateHealthBar()
@@ -94,7 +97,8 @@ public class UIManager : MonoBehaviour
     public void EnableLosePanel()
     {
         pauseModePanel.SetActive(false);
-        playModePanel.SetActive(true);
+        playModePanel.SetActive(false);
+        losePanel.SetActive(true);
         Time.timeScale = 0;
     }
 
@@ -108,4 +112,15 @@ public class UIManager : MonoBehaviour
         EnablePlayMode();
     }
 
+    private void HideStartPanel()
+    {
+        Time.timeScale = 1;
+        startPanel.SetActive(false);
+        playModePanel.SetActive(true);
+    }
+
+    public void StartButton()
+    {
+        HideStartPanel();
+    }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
 
 public class PlayerController : Unit
 {
@@ -18,10 +17,12 @@ public class PlayerController : Unit
     private int currentEnergy;
     private float bulletSpeed = 50.0f;
     private bool isReadyToShoot = true;
+    private Rigidbody playerBody;
 
     private void Start()
     {
         SetDefaultStats();
+        playerBody = GetComponent<Rigidbody>();
         uiManager.UpdateHealthBar(currentHealthPoints);
         uiManager.UpdateEnergyBar(currentEnergy);
     }
@@ -100,7 +101,16 @@ public class PlayerController : Unit
 
     private void PlayerDie()
     {
-        // !!!!!!!!
+        playerBody.isKinematic = false;
+        playerBody.useGravity = true;
+        playerBody.AddForce(Vector3.back * 5, ForceMode.Impulse);
+        StartCoroutine(EnableLoseState());
+    }
+
+    private IEnumerator EnableLoseState()
+    {
+        yield return new WaitForSeconds(1.0f);
+        uiManager.EnableLosePanel();
     }
 
     public void RewardPlayerForDoubleKill()
@@ -144,10 +154,10 @@ public class PlayerController : Unit
         }
     }
 
-    //private void Update()
-    //{
-    //    DebugRicochetChance();
-    //}
+    private void Update() // Disable (!!!)
+    {
+        DebugRicochetChance();
+    }
 
     private void DebugRicochetChance()
     {

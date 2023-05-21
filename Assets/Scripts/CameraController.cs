@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private float shakeDuration = 0.3f;
+    private float shakeDuration = 0.1f;
     private float shakeAmount = 0.4f;
     private float decreaseFactor = 1f;
     private float currentShakeDuration = 0f;
