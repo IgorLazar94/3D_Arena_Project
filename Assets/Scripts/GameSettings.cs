@@ -35,6 +35,11 @@ public class GameSettings : MonoBehaviour {
     [SerializeField] private float timeToUp;
     [SerializeField] private float flySpeed;
 
+    [Space]
+    [Header("GlobalSettings")]
+    [SerializeField] private int timeToSpawnEnemy;
+    [SerializeField] private int limitToSpawnEnemy;
+
 
     // Player Stats
     public int GetMaxPlayerHealth()
@@ -105,5 +110,13 @@ public class GameSettings : MonoBehaviour {
         return flySpeed;
     }
 
-
+    // Global Settings
+    public int GetTimeToSpawnEnemy()
+    {
+        return timeToSpawnEnemy;
+    }
+    public int GetLimitToSpawnEnemy()
+    {
+        return limitToSpawnEnemy;
+    }
 }

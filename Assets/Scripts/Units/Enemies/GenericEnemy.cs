@@ -7,6 +7,12 @@ public class GenericEnemy : Unit {
     protected int currentHealthPoints;
     protected PlayerController player;
 	protected int rewardEnergy { get; set; }
+    private EnemiesSpawner spawner;
+
+    public void SetLinkEnemySpawner(EnemiesSpawner _spawner)
+    {
+        spawner = _spawner;
+    }
 
     protected void Start()
 	{
@@ -29,9 +35,10 @@ public class GenericEnemy : Unit {
         }
     }
 
-    private void EnemyDieFromPlayer()
+    public void EnemyDieFromPlayer()
     {
         player.UpdateEnergy(rewardEnergy);
+        spawner.AddKilledEnemyCount();
         EnemyDie();
     }
 

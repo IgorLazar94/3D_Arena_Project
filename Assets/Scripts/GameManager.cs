@@ -8,30 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerController player;
-    [SerializeField] private BlueEnemy blueEnemy;
-    [SerializeField] private RedEnemy redEnemy;
     [SerializeField] private CameraController cameraController;
-    private List<GenericEnemy> genericEnemies = new List<GenericEnemy>();
-
-    private void Start()
-    {
-        InitializePlayer();
-        StartCoroutine(InitializeEnemy());
-    }
-
-    private void InitializePlayer()
-    {
-
-    }
-
-    private IEnumerator InitializeEnemy()
-    {
-        while (true)
-        {
-
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
 
     public void PlayerShoot()
     {
@@ -41,11 +18,6 @@ public class GameManager : MonoBehaviour
     public void UseUltimatePower()
     {
         player.UseUltimate();
-    }
-
-    public void DestroyAllEnemies()
-    {
-        Debug.Log("all enemies died");
     }
 
     public void VisualHit()

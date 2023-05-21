@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Experimental.PlayerLoop;
 
 public class PlayerController : Unit
 {
@@ -13,6 +14,7 @@ public class PlayerController : Unit
     [SerializeField] private Transform projectileContainer;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private EnemiesSpawner enemiesSpawner;
     private int currentHealthPoints;
     private int currentEnergy;
     private float bulletSpeed = 50.0f;
@@ -25,7 +27,11 @@ public class PlayerController : Unit
         playerBody = GetComponent<Rigidbody>();
         uiManager.UpdateHealthBar(currentHealthPoints);
         uiManager.UpdateEnergyBar(currentEnergy);
+
+
     }
+
+   
 
     private void SetDefaultStats()
     {
@@ -130,7 +136,7 @@ public class PlayerController : Unit
     {
         if (currentEnergy >= maxEnergy)
         {
-            gameManager.DestroyAllEnemies();
+            enemiesSpawner.DestroyAllEnemies();
             currentEnergy = 0;
         }
     }
@@ -154,12 +160,8 @@ public class PlayerController : Unit
         }
     }
 
-    private void Update() // Disable (!!!)
-    {
-        DebugRicochetChance();
-    }
-
-    private void DebugRicochetChance()
+   
+    private void DebugTesting()
     {
         if (Application.platform == RuntimePlatform.WindowsEditor)
         {
@@ -171,7 +173,61 @@ public class PlayerController : Unit
             {
                 PlayerGetDamage();
             }
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                TeleportPlayer();
+            }
         }
     }
 
+    Vector3 GetRandomPointInRadius(Vector3 center, float radius)
+    {
+        Vector2 randomPoint2D = Random.insideUnitCircle * radius;
+        Vector3 randomPoint = new Vector3(randomPoint2D.x, 0f, randomPoint2D.y);
+        randomPoint = center + randomPoint;
+
+        // Проверка, что случайная точка не находится в пределах коллайдера другого объекта
+        while (Physics.CheckSphere(randomPoint, 0.1f, LayerMask.NameToLayer("Obstacle")))
+        {
+            randomPoint2D = Random.insideUnitCircle * radius;
+            randomPoint = new Vector3(randomPoint2D.x, 1f, randomPoint2D.y);
+            randomPoint = center + randomPoint;
+        }
+
+        return randomPoint;
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("PlayZone"))
+        {
+            Debug.Log("teleport");
+        }
+    }
+
+    private void Update() 
+    {
+        DebugTesting();   // Disable (!!!)
+        CheckDistance();
+    }
+
+    private void CheckDistance()
+    {
+        float distanceToArenaCenter = Vector3.Distance(transform.position, Vector3.zero);
+        if (distanceToArenaCenter > 23f)
+        {
+            TeleportPlayer();
+        }
+    }
+    private void TeleportPlayer()
+    {
+        Vector3 newPlayerPos = GetRandomPointInRadius(Vector3.zero, 23f);
+        transform.position = newPlayerPos;
+    }
+
+    private void CheckEnemyDistance()
+    {
+        // get enemies list
+    }
 }

@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
+
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] EnemiesSpawner enemiesSpawner;
+
     [SerializeField] Image aim;
     [SerializeField] Image healthBarFull;
     [SerializeField] Image energyBarFull;
@@ -17,6 +21,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject losePanel;
     [SerializeField] GameObject startPanel;
 
+    [SerializeField] TextMeshProUGUI killedEnemyText;
     private float coefficientHealth;
     private float coefficientEnergy;
     private float maxHP;
@@ -122,5 +127,11 @@ public class UIManager : MonoBehaviour
     public void StartButton()
     {
         HideStartPanel();
+    }
+
+    public void UpdateKilledEnemyText()
+    {
+        var killedEnemy = enemiesSpawner.GetKilledEnemiesCount();
+        killedEnemyText.text = "Defeated Enemy: " + killedEnemy.ToString();
     }
 }
