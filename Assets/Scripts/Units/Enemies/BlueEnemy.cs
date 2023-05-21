@@ -32,8 +32,8 @@ public class BlueEnemy : GenericEnemy
         if (other.gameObject.tag == TagList.Bullet)
         {
             var bulletScript = other.gameObject.GetComponent<PlayerProjectile>();
+            EnemyGetDamage();
 
-                EnemyGetDamage();
             if (bulletScript.isReadyForDoubleKill)
             {
                 if (currentHealthPoints <= 0)

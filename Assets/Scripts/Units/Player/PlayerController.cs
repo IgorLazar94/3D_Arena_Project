@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
 
@@ -54,13 +55,17 @@ public class PlayerController : Unit
         bullet.GetComponent<Rigidbody>().AddForce(shootDirection.normalized * bulletSpeed, ForceMode.Impulse);
         bullet.SetBulletSpeed(bulletSpeed);
         bullet.transform.parent = projectileContainer;
-
+        uiManager.MoveAim();
         yield return new WaitForSeconds(0.5f);
         isReadyToShoot = true;
     }
 
     public void UpdateEnergy(int bonusEnergy)
     {
+        if (bonusEnergy < 0)
+        {
+            uiManager.ActivateHitBlueSprite();
+        }
         currentEnergy += bonusEnergy;
         currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
         uiManager.UpdateEnergyBar(currentEnergy);
@@ -82,9 +87,10 @@ public class PlayerController : Unit
     public void PlayerGetDamage()
     {
         RemoveHealthPoint();
+        gameManager.VisualHit();
+        uiManager.ActivateHitRedSprite();
+
         Debug.Log(currentHealthPoints + "player HP");
-
-
         if (currentHealthPoints <= 0)
         {
             PlayerDie();
@@ -137,11 +143,11 @@ public class PlayerController : Unit
         }
     }
 
-    // ======================================================
-    private void Update()
-    {
-        DebugRicochetChance();
-    }
+    //private void Update()
+    //{
+    //    DebugRicochetChance();
+    //}
+
     private void DebugRicochetChance()
     {
         if (Application.platform == RuntimePlatform.WindowsEditor)
@@ -156,7 +162,5 @@ public class PlayerController : Unit
             }
         }
     }
-
-    //==============================================================
 
 }

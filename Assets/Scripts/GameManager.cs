@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerController player;
     [SerializeField] private BlueEnemy blueEnemy;
     [SerializeField] private RedEnemy redEnemy;
+    [SerializeField] private CameraController cameraController;
     private List<GenericEnemy> genericEnemies = new List<GenericEnemy>();
 
     private void Start()
@@ -44,5 +45,14 @@ public class GameManager : MonoBehaviour
     public void DestroyAllEnemies()
     {
         Debug.Log("all enemies died");
+    }
+
+    public void VisualHit()
+    {
+        cameraController.ShakeCamera();
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            Handheld.Vibrate();
+        }
     }
 }

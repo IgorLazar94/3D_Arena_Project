@@ -8,6 +8,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image aim;
     [SerializeField] Image healthBarFull;
     [SerializeField] Image energyBarFull;
+
+    [SerializeField] Image hitRedSprite;
+    [SerializeField] Image hitBlueSprite;
+
     //[SerializeField] GameObject pauseModePanel;
     //[SerializeField] GameObject playModePanel;
     private float coefficientHealth;
@@ -45,13 +49,29 @@ public class UIManager : MonoBehaviour
 
     public void MoveAim()
     {
-        aim.gameObject.transform.DOScale(1.2f, 0.25f).OnComplete(() => transform.DOScale(1.0f, 0.25f));
+        var rectTransfrom = aim.GetComponent<RectTransform>();
+        aim.rectTransform
+            .DOScale(1.75f, 0.25f)
+            .SetEase(Ease.OutFlash)
+            .OnComplete(() => rectTransfrom
+            .DOScale(1.0f, 0.25f)
+            .SetEase(Ease.Linear));
     }
 
     private void GetDefaultStates()
     {
         maxHP = GameSettings.Instance.GetMaxPlayerHealth();
         maxEnergy = GameSettings.Instance.GetMaxEnergy();
+    }
+
+    public void ActivateHitRedSprite()
+    {
+        hitRedSprite.DOFade(0.3f, 0.15f).OnComplete(() => hitRedSprite.DOFade(0, 0.35f));
+    }
+
+    public void ActivateHitBlueSprite()
+    {
+        hitBlueSprite.DOFade(0.3f, 0.15f).OnComplete(() => hitBlueSprite.DOFade(0, 0.35f));
     }
 
 

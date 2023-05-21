@@ -74,6 +74,15 @@ public class RedEnemy : GenericEnemy
         {
             var bulletScript = collision.gameObject.GetComponent<PlayerProjectile>();
             EnemyGetDamage();
+
+            if (bulletScript.isReadyForDoubleKill)
+            {
+                if (currentHealthPoints <= 0)
+                {
+                    player.RewardPlayerForDoubleKill();
+                }
+            }
+
             if (bulletScript.GetChanceToRicochet())
             {
                 bulletScript.ChooseRandomDirection();
