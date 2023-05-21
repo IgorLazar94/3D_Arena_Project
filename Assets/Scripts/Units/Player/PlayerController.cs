@@ -21,6 +21,7 @@ public class PlayerController : Unit
     private bool isReadyToShoot = true;
     private Rigidbody playerBody;
     private float playerReloadTime;
+    private float arenaRadius = 23f;
 
     public static System.Action<Transform> onPlayerTeleported;
     private void Start()
@@ -207,15 +208,6 @@ public class PlayerController : Unit
         return randomPoint;
     }
 
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.layer == LayerMask.NameToLayer("PlayZone"))
-    //    {
-    //        Debug.Log("teleport");
-    //    }
-    //}
-
     private void Update() 
     {
         DebugTesting();   // Disable (!!!)
@@ -225,20 +217,32 @@ public class PlayerController : Unit
     private void CheckDistance()
     {
         float distanceToArenaCenter = Vector3.Distance(transform.position, Vector3.zero);
-        if (distanceToArenaCenter > 23f)
+        if (distanceToArenaCenter > arenaRadius)
         {
+            CheckEnemyDistance();
             TeleportPlayer();
         }
     }
     private void TeleportPlayer()
     {
         onPlayerTeleported.Invoke(transform);
-        Vector3 newPlayerPos = GetRandomPointInRadius(Vector3.zero, 23f);
+        Vector3 newPlayerPos = GetRandomPointInRadius(Vector3.zero, arenaRadius);
         transform.position = newPlayerPos;
     }
 
     private void CheckEnemyDistance()
     {
-        // get enemies list
+        var enemies = enemiesSpawner.genericEnemiesList;
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            float distanceToEnemy = Vector3.Distance(enemies[i].gameObject.transform.position, transform.position);
+            if (distanceToEnemy > 6f)
+            {
+                return;
+            } else
+            {
+                Debug.LogWarning("Enemy close to teleport");
+            }
+        }
     }
 }
