@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class RedEnemy : GenericEnemy {
+public class RedEnemy : GenericEnemy
+{
 
     private float heightToUp;
     private float timeToUp;
@@ -71,7 +72,16 @@ public class RedEnemy : GenericEnemy {
     {
         if (collision.gameObject.tag == TagList.Bullet)
         {
+            var bulletScript = collision.gameObject.GetComponent<PlayerProjectile>();
             EnemyGetDamage();
+            if (bulletScript.GetChanceToRicochet())
+            {
+                bulletScript.ChooseRandomDirection();
+            }
+            else
+            {
+                bulletScript.DestroyProjectile();
+            }
         }
 
         if (collision.gameObject.tag == TagList.Player)

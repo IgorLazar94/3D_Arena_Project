@@ -17,6 +17,7 @@ public class PlayerController : Unit
     private int currentEnergy;
     private float bulletSpeed = 50.0f;
     private bool isReadyToShoot = true;
+
     private void Start()
     {
         SetDefaultStats();
@@ -49,7 +50,9 @@ public class PlayerController : Unit
         Vector3 shootDirection = bulletSpawnPos.position - cameraObject.transform.position;
         //var rightCorner = Quaternion.Euler(new Vector3(gun.position.x, gun.transform.position.y, gun.transform.position.z));
         var bullet = Instantiate(bulletPrefab, bulletSpawnPos.position, Quaternion.identity, transform);
+        bullet.SetChanceToRicochet(CheckChanceToRicochet());
         bullet.GetComponent<Rigidbody>().AddForce(shootDirection.normalized * bulletSpeed, ForceMode.Impulse);
+        bullet.SetBulletSpeed(bulletSpeed);
         bullet.transform.parent = projectileContainer;
 
         yield return new WaitForSeconds(0.5f);
@@ -58,10 +61,6 @@ public class PlayerController : Unit
 
     public void UpdateEnergy(int bonusEnergy)
     {
-        if (bonusEnergy < 0)
-        {
-            Debug.Log("energy damage");
-        }
         currentEnergy += bonusEnergy;
         currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
         uiManager.UpdateEnergyBar(currentEnergy);
@@ -94,7 +93,20 @@ public class PlayerController : Unit
 
     private void PlayerDie()
     {
+        // !!!!!!!!
+    }
 
+    public void RewardPlayerForDoubleKill()
+    {
+        int randomNumber = Random.Range(1, 3);
+        if (randomNumber == 1)
+        {
+            AddHealthPoint(maxHealthPoints / 2);
+        }
+        else
+        {
+            UpdateEnergy(25);
+        }
     }
 
     public void UseUltimate()
@@ -102,7 +114,49 @@ public class PlayerController : Unit
         if (currentEnergy >= maxEnergy)
         {
             gameManager.DestroyAllEnemies();
+            currentEnergy = 0;
         }
     }
+
+    private bool CheckChanceToRicochet()
+    {
+        float differenceHP = (float)currentHealthPoints / (float)maxHealthPoints;
+        if (differenceHP <= 0.1)
+        {
+            return true;
+        }
+        float chance = 1f - Random.value;
+
+        if (differenceHP > chance)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    // ======================================================
+    private void Update()
+    {
+        DebugRicochetChance();
+    }
+    private void DebugRicochetChance()
+    {
+        if (Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                CheckChanceToRicochet();
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                PlayerGetDamage();
+            }
+        }
+    }
+
+    //==============================================================
 
 }

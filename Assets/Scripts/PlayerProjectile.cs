@@ -4,20 +4,58 @@ using UnityEngine;
 
 public class PlayerProjectile : MonoBehaviour
 {
+    public bool isReadyForDoubleKill { get; private set; }
+    private bool chanceToRicochet;
+    private Rigidbody bulletBody;
+    private float bulletSpeed;
+
     private void Start()
     {
-        Invoke("DestroyProjectile", 5.0f);
+        isReadyForDoubleKill = false;
+        Invoke("DestroyProjectile", 5.0f); // ???
+        bulletBody = gameObject.GetComponent<Rigidbody>();
     }
-    private void OnCollisionEnter(Collision collision)
+
+
+    public void SetBulletSpeed(float _bulletSpeed)
     {
-        if (collision.gameObject.tag == TagList.Environment)
+        bulletSpeed = _bulletSpeed;
+    }
+
+    public bool GetChanceToRicochet()
+    {
+        return chanceToRicochet;
+    }
+
+    public void SetChanceToRicochet(bool value)
+    {
+        chanceToRicochet = value;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == TagList.Environment)
         {
-            DestroyProjectile();
+            if (GetChanceToRicochet())
+            {
+                ChooseRandomDirection();
+            }
+            else
+            {
+                DestroyProjectile();
+            }
         }
     }
 
-    private void DestroyProjectile()
+    public void DestroyProjectile()
     {
         Destroy(this.gameObject);
+    }
+
+    public void ChooseRandomDirection()
+    {
+        Vector3 randomDirection = Random.insideUnitSphere.normalized;
+        bulletBody.AddForce(randomDirection * bulletSpeed, ForceMode.Impulse);
+        isReadyForDoubleKill = true;
     }
 }
