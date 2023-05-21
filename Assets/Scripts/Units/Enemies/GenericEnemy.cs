@@ -44,6 +44,7 @@ public class GenericEnemy : Unit {
 
     protected void EnemyDie()
     {
+        spawner.genericEnemiesList.Remove(this);
         Destroy(gameObject);
     }
 

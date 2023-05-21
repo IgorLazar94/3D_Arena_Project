@@ -7,6 +7,7 @@ public class EnemiesSpawner : MonoBehaviour
     public List<GenericEnemy> genericEnemiesList = new List<GenericEnemy>();
     [SerializeField] private BlueEnemy blueEnemy;
     [SerializeField] private RedEnemy redEnemy;
+    [SerializeField] private UIManager uiManager;
     private int killedEnemyCount;
     private int timeToSpawnEnemy;
     private int limitToSpawnEnemy;
@@ -29,13 +30,13 @@ public class EnemiesSpawner : MonoBehaviour
     public void AddKilledEnemyCount()
     {
         killedEnemyCount++;
+        uiManager.UpdateKilledEnemyText();
     }
 
     private IEnumerator InitializeEnemies()
     {
         while (true)
         {
-
             yield return new WaitForSeconds(timeToSpawnEnemy);
             if (timeToSpawnEnemy > limitToSpawnEnemy)
             {
@@ -47,8 +48,9 @@ public class EnemiesSpawner : MonoBehaviour
                 for (int i = 0; i < countToSpawnEnemy; i++)
                 {
                     CreateOneEnemy();
-                    countToSpawnEnemy++;
                 }
+                    countToSpawnEnemy++;
+                Debug.Log(countToSpawnEnemy + "count to spawn enemy");
             }
         }
     }
@@ -59,13 +61,14 @@ public class EnemiesSpawner : MonoBehaviour
         int randomNubmer = Random.Range(1, 3);
         if (randomNubmer > 1 && !HasEnoughBlueEnemies())
         {
-            var enemy = Instantiate(blueEnemy, randomPos, Quaternion.identity);
+            var enemy = Instantiate(blueEnemy, randomPos + (Vector3.up * 2), Quaternion.identity);
             enemy.SetLinkEnemySpawner(this);
             genericEnemiesList.Add(enemy);
         }
         else
         {
             var enemy = Instantiate(redEnemy, randomPos, Quaternion.identity);
+            enemy.SetLinkEnemySpawner(this);
             genericEnemiesList.Add(enemy);
         }
 
@@ -76,11 +79,12 @@ public class EnemiesSpawner : MonoBehaviour
         int counter = 0;
         for (int i = 0; i < genericEnemiesList.Count; i++)
         {
-            if (genericEnemiesList[i].GetComponent<BlueEnemy>())
+            if (genericEnemiesList[i].GetComponent<BlueEnemy>() != null)
             {
                 counter++;
             }
         }
+
         if (counter > (genericEnemiesList.Count / 4))
         {
             return true;

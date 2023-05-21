@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d9f765afb77044ead465981f4fe4de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileContainer: {fileID: 0}
+  spawner: {fileID: 0}
   bulletPrefab: {fileID: 496370612570017058, guid: f3f88e807916a564c9b8a9f33a80ce91,
     type: 3}
   bulletSpawnPos: {fileID: 847013929026863359}

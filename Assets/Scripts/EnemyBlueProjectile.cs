@@ -8,10 +8,22 @@ public class EnemyBlueProjectile : MonoBehaviour
     private bool isReadyToFly = false;
     private float flySpeed;
     private int energyDamage;
+    private bool playerIsTeleported;
+    private Vector3 falsePosition;
 
+    private void OnEnable()
+    {
+        PlayerController.onPlayerTeleported += ChangeBehaviour;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.onPlayerTeleported -= ChangeBehaviour;
+    }
 
     private void Start()
     {
+        playerIsTeleported = false;
         flySpeed = GameSettings.Instance.GetFlySpeedBlueProjectile();
         energyDamage = GameSettings.Instance.GetEnergyDamage();
     }
@@ -26,7 +38,40 @@ public class EnemyBlueProjectile : MonoBehaviour
     {
         if (isReadyToFly)
         {
-            FlyToPlayer();
+            if (!playerIsTeleported)
+            {
+                FlyToPlayer();
+            } else
+            {
+                FlyToFalsePosition();
+            }
+        }
+    }
+
+    private void ChangeBehaviour(Transform playerLastPosition)
+    {
+        playerIsTeleported = true;
+        falsePosition = playerController.gameObject.transform.position;
+    }
+
+    private void FlyToFalsePosition()
+    {
+        Vector3 direction = playerController.gameObject.transform.position - transform.position;
+        float distance = direction.magnitude;
+        Vector3 normalizedDirection = direction.normalized;
+        Vector3 displacement = normalizedDirection * flySpeed * Time.deltaTime;
+
+        if (displacement.magnitude >= distance)
+        {
+            transform.position = playerController.transform.position;
+        }
+        else
+        {
+            transform.position += displacement;
+        }
+        if (distance < 1.5f)
+        {
+            DestroyBullet();
         }
     }
 

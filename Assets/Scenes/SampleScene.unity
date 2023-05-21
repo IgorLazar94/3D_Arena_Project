@@ -638,6 +638,7 @@ MonoBehaviour:
   blueEnemy: {fileID: 114411938857803414, guid: e30b355aa61888c468dd5ce8a4185402,
     type: 3}
   redEnemy: {fileID: 114535316744411404, guid: 5fe5b9294e400f940b018c7650016061, type: 3}
+  uiManager: {fileID: 282562353}
 --- !u!4 &709659545
 Transform:
   m_ObjectHideFlags: 0
@@ -761,6 +762,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114535316744411404, guid: 5fe5b9294e400f940b018c7650016061,
+        type: 3}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 709659544}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fe5b9294e400f940b018c7650016061, type: 3}
 --- !u!1001 &1142757823
@@ -924,6 +930,11 @@ PrefabInstance:
       propertyPath: projectileContainer
       value: 
       objectReference: {fileID: 773190230}
+    - target: {fileID: 114411938857803414, guid: e30b355aa61888c468dd5ce8a4185402,
+        type: 3}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 709659544}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e30b355aa61888c468dd5ce8a4185402, type: 3}
 --- !u!114 &1375209286 stripped

@@ -21,6 +21,7 @@ public class PlayerController : Unit
     private bool isReadyToShoot = true;
     private Rigidbody playerBody;
 
+    public static System.Action<Transform> onPlayerTeleported;
     private void Start()
     {
         SetDefaultStats();
@@ -186,7 +187,6 @@ public class PlayerController : Unit
         Vector3 randomPoint = new Vector3(randomPoint2D.x, 0f, randomPoint2D.y);
         randomPoint = center + randomPoint;
 
-        // Проверка, что случайная точка не находится в пределах коллайдера другого объекта
         while (Physics.CheckSphere(randomPoint, 0.1f, LayerMask.NameToLayer("Obstacle")))
         {
             randomPoint2D = Random.insideUnitCircle * radius;
@@ -198,13 +198,13 @@ public class PlayerController : Unit
     }
 
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("PlayZone"))
-        {
-            Debug.Log("teleport");
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.layer == LayerMask.NameToLayer("PlayZone"))
+    //    {
+    //        Debug.Log("teleport");
+    //    }
+    //}
 
     private void Update() 
     {
@@ -222,6 +222,7 @@ public class PlayerController : Unit
     }
     private void TeleportPlayer()
     {
+        onPlayerTeleported.Invoke(transform);
         Vector3 newPlayerPos = GetRandomPointInRadius(Vector3.zero, 23f);
         transform.position = newPlayerPos;
     }

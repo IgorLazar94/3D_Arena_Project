@@ -7,7 +7,6 @@ using UnityEngine.Experimental.PlayerLoop;
 public class BlueEnemy : GenericEnemy
 {
 
-    [SerializeField] private Transform projectileContainer;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPos;
 
@@ -66,7 +65,6 @@ public class BlueEnemy : GenericEnemy
     {
         var bullet = Instantiate(bulletPrefab, bulletSpawnPos.position, Quaternion.identity, transform);
         bullet.GetComponent<EnemyBlueProjectile>().SetPlayer(player);
-        bullet.transform.parent = projectileContainer;
     }
 
 

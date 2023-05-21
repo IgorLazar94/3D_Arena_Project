@@ -131,7 +131,8 @@ public class UIManager : MonoBehaviour
 
     public void UpdateKilledEnemyText()
     {
-        var killedEnemy = enemiesSpawner.GetKilledEnemiesCount();
+        int killedEnemy = enemiesSpawner.GetKilledEnemiesCount();
+        Debug.Log(killedEnemy + " killed enemy");
         killedEnemyText.text = "Defeated Enemy: " + killedEnemy.ToString();
     }
 }
