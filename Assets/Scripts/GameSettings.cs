@@ -17,6 +17,7 @@ public class GameSettings : MonoBehaviour {
     [SerializeField] private int getDamagePlayer;
     [SerializeField] private float playerMoveSpeed;
     [SerializeField] private int playerBulletSpeed;
+    [SerializeField] private float playerReloadTime;
 
     [Space]
     [Header("BlueEnemyStats")]
@@ -61,6 +62,10 @@ public class GameSettings : MonoBehaviour {
     public int GetPlayerBulletSpeed()
     {
         return playerBulletSpeed;
+    }
+    public float GetPlayerReloadTime()
+    {
+        return playerReloadTime;
     }
     // Blue enemy Stats
 

@@ -45,11 +45,12 @@ public class EnemiesSpawner : MonoBehaviour
             }
             else
             {
-                for (int i = 0; i < countToSpawnEnemy; i++)
+                for (int i = 0; i < /*countToSpawnEnemy*/limitToSpawnEnemy; i++)
                 {
                     CreateOneEnemy();
                 }
-                    countToSpawnEnemy++;
+                    //countToSpawnEnemy++;
+                    // По тех задаче спавн увеличивается на 1 единицу с каждой инициализацией, которая сокращается до 2-х секунд, это слишком много
                 Debug.Log(countToSpawnEnemy + "count to spawn enemy");
             }
         }
@@ -112,10 +113,18 @@ public class EnemiesSpawner : MonoBehaviour
     }
     public void DestroyAllEnemies()
     {
-        for (int i = 0; i < genericEnemiesList.Count; i++)
+        // === костыль =(
+        var test = FindObjectsOfType<GenericEnemy>();
+        foreach (var enemy in test)
         {
-            genericEnemiesList[i].EnemyDieFromPlayer();
+            enemy.EnemyDieFromUltimate();
         }
+
+        //for (int i = 0; i < genericEnemiesList.Count; i++)
+        //{
+        //    genericEnemiesList[i].EnemyDieFromUltimate();
+        //    Debug.Log("iteration");
+        //}
     }
 
 }

@@ -65,6 +65,7 @@ public class BlueEnemy : GenericEnemy
     {
         var bullet = Instantiate(bulletPrefab, bulletSpawnPos.position, Quaternion.identity, transform);
         bullet.GetComponent<EnemyBlueProjectile>().SetPlayer(player);
+        bullet.transform.parent = null;
     }
 
 

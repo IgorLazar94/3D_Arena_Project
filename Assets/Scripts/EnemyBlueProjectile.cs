@@ -26,6 +26,7 @@ public class EnemyBlueProjectile : MonoBehaviour
         playerIsTeleported = false;
         flySpeed = GameSettings.Instance.GetFlySpeedBlueProjectile();
         energyDamage = GameSettings.Instance.GetEnergyDamage();
+        Invoke("DestroyBullet", 20f);
     }
 
     public void SetPlayer(PlayerController _playerController)
@@ -56,14 +57,14 @@ public class EnemyBlueProjectile : MonoBehaviour
 
     private void FlyToFalsePosition()
     {
-        Vector3 direction = playerController.gameObject.transform.position - transform.position;
+        Vector3 direction = falsePosition - transform.position;
         float distance = direction.magnitude;
         Vector3 normalizedDirection = direction.normalized;
         Vector3 displacement = normalizedDirection * flySpeed * Time.deltaTime;
 
         if (displacement.magnitude >= distance)
         {
-            transform.position = playerController.transform.position;
+            transform.position = falsePosition;
         }
         else
         {
@@ -77,7 +78,7 @@ public class EnemyBlueProjectile : MonoBehaviour
 
     private void FlyToPlayer()
     {
-        Vector3 direction = playerController.gameObject.transform.position - transform.position;
+        Vector3 direction = playerController.transform.position - transform.position;
         float distance = direction.magnitude;
         Vector3 normalizedDirection = direction.normalized;
         Vector3 displacement = normalizedDirection * flySpeed * Time.deltaTime;
@@ -90,6 +91,7 @@ public class EnemyBlueProjectile : MonoBehaviour
         {
             transform.position += displacement;
         }
+        transform.position += displacement;
     }
 
     private void OnTriggerEnter(Collider other)

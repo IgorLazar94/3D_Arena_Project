@@ -20,6 +20,7 @@ public class PlayerController : Unit
     private float bulletSpeed = 50.0f;
     private bool isReadyToShoot = true;
     private Rigidbody playerBody;
+    private float playerReloadTime;
 
     public static System.Action<Transform> onPlayerTeleported;
     private void Start()
@@ -40,6 +41,7 @@ public class PlayerController : Unit
         maxEnergy = GameSettings.Instance.GetMaxEnergy();
         damage = GameSettings.Instance.GetDamagePlayer();
         bulletSpeed = GameSettings.Instance.GetPlayerBulletSpeed();
+        playerReloadTime = GameSettings.Instance.GetPlayerReloadTime();
         currentHealthPoints = maxHealthPoints;
         currentEnergy = maxEnergy / 2;
     }
@@ -65,7 +67,7 @@ public class PlayerController : Unit
         bullet.SetBulletSpeed(bulletSpeed);
         bullet.transform.parent = projectileContainer;
         uiManager.MoveAim();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(playerReloadTime);
         isReadyToShoot = true;
     }
 
@@ -135,10 +137,14 @@ public class PlayerController : Unit
 
     public void UseUltimate()
     {
+        Debug.Log("use ultimate");
         if (currentEnergy >= maxEnergy)
         {
+            uiManager.ShowUltimateEffect();
             enemiesSpawner.DestroyAllEnemies();
             currentEnergy = 0;
+            uiManager.UpdateEnergyBar(0f);
+            gameManager.VisualHit();
         }
     }
 
@@ -177,6 +183,10 @@ public class PlayerController : Unit
             if (Input.GetKeyDown(KeyCode.T))
             {
                 TeleportPlayer();
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                UpdateEnergy(25);
             }
         }
     }

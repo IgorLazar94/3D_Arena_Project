@@ -12,7 +12,7 @@ public class PlayerProjectile : MonoBehaviour
     private void Start()
     {
         isReadyForDoubleKill = false;
-        Invoke("DestroyProjectile", 5.0f); // ???
+        Invoke("DestroyProjectile", 5.0f);
         bulletBody = gameObject.GetComponent<Rigidbody>();
     }
 

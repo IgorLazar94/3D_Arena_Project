@@ -39,9 +39,16 @@ public class GenericEnemy : Unit {
     {
         player.UpdateEnergy(rewardEnergy);
         spawner.AddKilledEnemyCount();
+
         EnemyDie();
     }
 
+    public void EnemyDieFromUltimate()
+    {
+        spawner.AddKilledEnemyCount();
+        EnemyDie();
+
+    }
     protected void EnemyDie()
     {
         spawner.genericEnemiesList.Remove(this);

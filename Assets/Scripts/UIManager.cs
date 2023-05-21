@@ -21,11 +21,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject losePanel;
     [SerializeField] GameObject startPanel;
 
+    [SerializeField] Image UltimateImage;
     [SerializeField] TextMeshProUGUI killedEnemyText;
     private float coefficientHealth;
     private float coefficientEnergy;
     private float maxHP;
     private float maxEnergy;
+    private float playerReloadTime;
 
 
     private void Start()
@@ -62,10 +64,10 @@ public class UIManager : MonoBehaviour
     {
         var rectTransfrom = aim.GetComponent<RectTransform>();
         aim.rectTransform
-            .DOScale(1.75f, 0.25f)
+            .DOScale(1.75f, playerReloadTime/2)
             .SetEase(Ease.OutFlash)
             .OnComplete(() => rectTransfrom
-            .DOScale(1.0f, 0.25f)
+            .DOScale(1.0f, playerReloadTime/2)
             .SetEase(Ease.Linear));
     }
 
@@ -73,6 +75,7 @@ public class UIManager : MonoBehaviour
     {
         maxHP = GameSettings.Instance.GetMaxPlayerHealth();
         maxEnergy = GameSettings.Instance.GetMaxEnergy();
+        playerReloadTime = GameSettings.Instance.GetPlayerReloadTime();
     }
 
     public void ActivateHitRedSprite()
@@ -132,7 +135,15 @@ public class UIManager : MonoBehaviour
     public void UpdateKilledEnemyText()
     {
         int killedEnemy = enemiesSpawner.GetKilledEnemiesCount();
-        Debug.Log(killedEnemy + " killed enemy");
         killedEnemyText.text = "Defeated Enemy: " + killedEnemy.ToString();
+    }
+
+    public void ShowUltimateEffect()
+    {
+        UltimateImage.DOFade(255, 0.1f)
+            .SetEase(Ease.Flash)
+            .OnComplete(() => UltimateImage
+            .DOFade(0, 0.35f)
+            .SetEase(Ease.InFlash));
     }
 }
