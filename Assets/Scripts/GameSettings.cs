@@ -15,7 +15,8 @@ public class GameSettings : MonoBehaviour {
     [SerializeField] private int maxHealthPlayer;
     [SerializeField] private int maxEnergyPlayer;
     [SerializeField] private int getDamagePlayer;
-    [SerializeField] private float playerSpeed;
+    [SerializeField] private float playerMoveSpeed;
+    [SerializeField] private int playerBulletSpeed;
 
     [Space]
     [Header("BlueEnemyStats")]
@@ -48,9 +49,13 @@ public class GameSettings : MonoBehaviour {
     {
         return getDamagePlayer;
     }
-    public float GetPlayerSpeed()
+    public float GetPlayerMoveSpeed()
     {
-        return getDamagePlayer;
+        return playerMoveSpeed;
+    }
+    public int GetPlayerBulletSpeed()
+    {
+        return playerBulletSpeed;
     }
     // Blue enemy Stats
 

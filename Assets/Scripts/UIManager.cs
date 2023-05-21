@@ -12,8 +12,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image hitRedSprite;
     [SerializeField] Image hitBlueSprite;
 
-    //[SerializeField] GameObject pauseModePanel;
-    //[SerializeField] GameObject playModePanel;
+    [SerializeField] GameObject pauseModePanel;
+    [SerializeField] GameObject playModePanel;
+    [SerializeField] GameObject losePanel;
+
     private float coefficientHealth;
     private float coefficientEnergy;
     private float maxHP;
@@ -22,6 +24,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         GetDefaultStates();
         CalculateHealthBar();
         CalculateEnergyBar();
@@ -74,6 +77,35 @@ public class UIManager : MonoBehaviour
         hitBlueSprite.DOFade(0.3f, 0.15f).OnComplete(() => hitBlueSprite.DOFade(0, 0.35f));
     }
 
+    private void EnablePauseMode()
+    {
+        playModePanel.SetActive(false);
+        pauseModePanel.SetActive(true);
+        Time.timeScale = 0;
+    }
 
+    private void EnablePlayMode()
+    {
+        Time.timeScale = 1;
+        pauseModePanel.SetActive(false);
+        playModePanel.SetActive(true);
+    }
+
+    public void EnableLosePanel()
+    {
+        pauseModePanel.SetActive(false);
+        playModePanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void PauseButton()
+    {
+        EnablePauseMode();
+    }
+
+    public void PlayButton()
+    {
+        EnablePlayMode();
+    }
 
 }

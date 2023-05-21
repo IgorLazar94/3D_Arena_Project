@@ -49,7 +49,7 @@ public class CharacterControl : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        walkingSpeed = GameSettings.Instance.GetPlayerSpeed();
+        walkingSpeed = GameSettings.Instance.GetPlayerMoveSpeed();
         //footsteps.Volum_max = walk_volum_max;
         //footsteps.Volum_min = walk_volum_min;
         //footsteps.step_Distance = walk_step_distance;

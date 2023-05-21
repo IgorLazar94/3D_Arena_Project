@@ -31,6 +31,7 @@ public class PlayerController : Unit
         maxHealthPoints = GameSettings.Instance.GetMaxPlayerHealth();
         maxEnergy = GameSettings.Instance.GetMaxEnergy();
         damage = GameSettings.Instance.GetDamagePlayer();
+        bulletSpeed = GameSettings.Instance.GetPlayerBulletSpeed();
         currentHealthPoints = maxHealthPoints;
         currentEnergy = maxEnergy / 2;
     }

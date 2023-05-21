@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4547399511207332}
   - component: {fileID: 20843365961813176}
   - component: {fileID: 81304939189538452}
+  - component: {fileID: 825117727}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -60,7 +61,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -83,6 +84,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442005607190910}
   m_Enabled: 1
+--- !u!114 &825117727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442005607190910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead21684c26cfca40a312d23902ff99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1452581503300202
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +107,7 @@ GameObject:
   - component: {fileID: 4895891858067676}
   - component: {fileID: 33257861987580054}
   - component: {fileID: 23901974887829520}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
