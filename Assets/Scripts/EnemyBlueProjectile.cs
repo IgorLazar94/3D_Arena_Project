@@ -42,7 +42,8 @@ public class EnemyBlueProjectile : MonoBehaviour
             if (!playerIsTeleported)
             {
                 FlyToPlayer();
-            } else
+            }
+            else
             {
                 FlyToFalsePosition();
             }
@@ -96,22 +97,12 @@ public class EnemyBlueProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == TagList.Player)
+        if (other.gameObject.CompareTag(TagList.Player))
         {
             other.gameObject.GetComponent<PlayerController>().UpdateEnergy(-energyDamage);
             DestroyBullet();
         }
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == TagList.Player)
-    //    {
-    //        Debug.Log("blue bullet Collision");
-    //        collision.gameObject.GetComponent<PlayerController>().UpdateEnergy(-energyDamage);
-    //        DestroyBullet();
-    //    }
-    //}
 
     private void DestroyBullet()
     {

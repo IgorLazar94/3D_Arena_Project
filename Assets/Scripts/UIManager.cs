@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     private float maxHP;
     private float maxEnergy;
     private float playerReloadTime;
+    RectTransform aimRectTransfrom;
 
 
     private void Start()
@@ -36,8 +37,7 @@ public class UIManager : MonoBehaviour
         GetDefaultStates();
         CalculateHealthBar();
         CalculateEnergyBar();
-
-
+        aimRectTransfrom = aim.GetComponent<RectTransform>();
     }
 
     public void CalculateHealthBar()
@@ -62,12 +62,11 @@ public class UIManager : MonoBehaviour
 
     public void MoveAim()
     {
-        var rectTransfrom = aim.GetComponent<RectTransform>();
-        aim.rectTransform
-            .DOScale(1.75f, playerReloadTime/2)
+        aimRectTransfrom
+            .DOScale(1.75f, playerReloadTime / 2)
             .SetEase(Ease.OutFlash)
-            .OnComplete(() => rectTransfrom
-            .DOScale(1.0f, playerReloadTime/2)
+            .OnComplete(() => aimRectTransfrom
+            .DOScale(1.0f, playerReloadTime / 2)
             .SetEase(Ease.Linear));
     }
 

@@ -27,7 +27,7 @@ public class BlueEnemy : GenericEnemy
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == TagList.Bullet)
+        if (other.gameObject.CompareTag(TagList.Bullet))
         {
             var bulletScript = other.gameObject.GetComponent<PlayerProjectile>();
             EnemyGetDamage();

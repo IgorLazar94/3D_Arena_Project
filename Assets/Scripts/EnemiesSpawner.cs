@@ -49,8 +49,8 @@ public class EnemiesSpawner : MonoBehaviour
                 {
                     CreateOneEnemy();
                 }
-                    //countToSpawnEnemy++;
-                    // По тех задаче спавн увеличивается на 1 единицу с каждой инициализацией, которая сокращается до 2-х секунд, это слишком много
+                //countToSpawnEnemy++;
+                // По тех задаче спавн увеличивается на 1 единицу с каждой инициализацией, которая сокращается до 2-х секунд, это слишком много
                 Debug.Log(countToSpawnEnemy + "count to spawn enemy");
             }
         }

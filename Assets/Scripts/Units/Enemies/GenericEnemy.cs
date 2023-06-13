@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenericEnemy : Unit {
+public class GenericEnemy : Unit
+{
 
     protected int currentHealthPoints;
     protected PlayerController player;
-	protected int rewardEnergy { get; set; }
+    protected int rewardEnergy { get; set; }
     private EnemiesSpawner spawner;
 
     public void SetLinkEnemySpawner(EnemiesSpawner _spawner)
@@ -15,7 +16,7 @@ public class GenericEnemy : Unit {
     }
 
     protected void Start()
-	{
+    {
         player = FindObjectOfType<PlayerController>();
 
     }

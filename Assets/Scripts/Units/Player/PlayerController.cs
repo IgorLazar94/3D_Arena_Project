@@ -33,7 +33,7 @@ public class PlayerController : Unit
 
     }
 
-   
+
 
     private void SetDefaultStats()
     {
@@ -167,7 +167,7 @@ public class PlayerController : Unit
         }
     }
 
-   
+
     private void DebugTesting()
     {
         if (Application.platform == RuntimePlatform.WindowsEditor)
@@ -207,7 +207,7 @@ public class PlayerController : Unit
         return randomPoint;
     }
 
-    private void Update() 
+    private void Update()
     {
         DebugTesting();   // Disable (!!!)
         CheckDistance();
@@ -238,7 +238,8 @@ public class PlayerController : Unit
             if (distanceToEnemy > 6f)
             {
                 return;
-            } else
+            }
+            else
             {
                 Debug.LogWarning("Enemy close to teleport");
             }

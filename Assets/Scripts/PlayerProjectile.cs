@@ -34,7 +34,7 @@ public class PlayerProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == TagList.Environment)
+        if (other.gameObject.CompareTag(TagList.Environment))
         {
             if (GetChanceToRicochet())
             {

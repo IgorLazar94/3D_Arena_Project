@@ -16,8 +16,8 @@ public class CameraController : MonoBehaviour
     {
         if (isReadyToShake)
         {
-        Shaking();
-        } 
+            Shaking();
+        }
     }
 
     public void ShakeCamera()

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSettings : MonoBehaviour {
+public class GameSettings : MonoBehaviour
+{
     public static GameSettings Instance { get; private set; }
 
     private void Awake()

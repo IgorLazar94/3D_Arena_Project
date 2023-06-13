@@ -70,7 +70,7 @@ public class RedEnemy : GenericEnemy
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == TagList.Bullet)
+        if (collision.gameObject.CompareTag(TagList.Bullet))
         {
             var bulletScript = collision.gameObject.GetComponent<PlayerProjectile>();
             EnemyGetDamage();
@@ -93,7 +93,7 @@ public class RedEnemy : GenericEnemy
             }
         }
 
-        if (collision.gameObject.tag == TagList.Player)
+        if (collision.gameObject.CompareTag(TagList.Player))
         {
             RedEnemyFindPlayer(collision.GetComponent<PlayerController>());
         }
