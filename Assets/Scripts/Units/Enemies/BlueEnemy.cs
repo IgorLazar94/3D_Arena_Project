@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
-using UnityEngine.Experimental.PlayerLoop;
 
 public class BlueEnemy : GenericEnemy
 {
