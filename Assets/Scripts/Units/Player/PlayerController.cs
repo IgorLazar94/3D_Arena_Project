@@ -14,6 +14,7 @@ public class PlayerController : Unit
     [SerializeField] private UIManager uiManager;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private EnemiesSpawner enemiesSpawner;
+    [SerializeField] private PoolController bulletPoolController;
     private int currentHealthPoints;
     private int currentEnergy;
     private float bulletSpeed = 50.0f;
@@ -51,17 +52,22 @@ public class PlayerController : Unit
     {
         if (isReadyToShoot)
         {
-            StartCoroutine(InstantiateBullet());
+            StartCoroutine(CreateBullet());
         }
     }
 
-    private IEnumerator InstantiateBullet()
+    private IEnumerator CreateBullet()
     {
         isReadyToShoot = false;
 
         Vector3 shootDirection = bulletSpawnPos.position - cameraObject.transform.position;
-        //var rightCorner = Quaternion.Euler(new Vector3(gun.position.x, gun.transform.position.y, gun.transform.position.z));
-        var bullet = Instantiate(bulletPrefab, bulletSpawnPos.position, Quaternion.identity, transform);
+        //var bullet = Instantiate(bulletPrefab, bulletSpawnPos.position, Quaternion.identity, transform);
+        var bullet = bulletPoolController.CreateBullet();
+        bullet.gameObject.transform.position = bulletSpawnPos.position;
+
+
+
+        // ==========
         bullet.SetChanceToRicochet(CheckChanceToRicochet());
         bullet.GetComponent<Rigidbody>().AddForce(shootDirection.normalized * bulletSpeed, ForceMode.Impulse);
         bullet.SetBulletSpeed(bulletSpeed);
@@ -100,8 +106,6 @@ public class PlayerController : Unit
         RemoveHealthPoint();
         gameManager.VisualHit();
         uiManager.ActivateHitRedSprite();
-
-        Debug.Log(currentHealthPoints + "player HP");
         if (currentHealthPoints <= 0)
         {
             PlayerDie();
@@ -137,7 +141,6 @@ public class PlayerController : Unit
 
     public void UseUltimate()
     {
-        Debug.Log("use ultimate");
         if (currentEnergy >= maxEnergy)
         {
             uiManager.ShowUltimateEffect();
@@ -209,7 +212,7 @@ public class PlayerController : Unit
 
     private void Update()
     {
-        DebugTesting();   // Disable (!!!)
+        //DebugTesting();
         CheckDistance();
     }
 

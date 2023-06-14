@@ -89,7 +89,7 @@ public class RedEnemy : GenericEnemy
             }
             else
             {
-                bulletScript.DestroyProjectile();
+                bulletScript.DisableProjectile();
             }
         }
 

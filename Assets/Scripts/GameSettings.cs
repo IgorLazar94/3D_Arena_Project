@@ -8,8 +8,22 @@ public class GameSettings : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        MakeSingleton();
     }
+
+    private void MakeSingleton()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance == this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
 
     [Space]
     [Header("PlayerStats")]
@@ -41,6 +55,12 @@ public class GameSettings : MonoBehaviour
     [Header("GlobalSettings")]
     [SerializeField] private int timeToSpawnEnemy;
     [SerializeField] private int limitToSpawnEnemy;
+
+    [Space]
+    [Header("PoolSettings")]
+    [SerializeField] private int poolCount;
+    [SerializeField] private bool poolAutoExpand;
+    [SerializeField] private PlayerProjectile playerBulletPrefab;
 
 
     // Player Stats
@@ -124,5 +144,19 @@ public class GameSettings : MonoBehaviour
     public int GetLimitToSpawnEnemy()
     {
         return limitToSpawnEnemy;
+    }
+
+    // Pool Settings
+    public int GetPoolCount()
+    {
+        return poolCount;
+    }
+    public bool GetPoolAutoExpand()
+    {
+        return poolAutoExpand;
+    }
+    public PlayerProjectile GetPlayerBulletPrefab()
+    {
+        return playerBulletPrefab;
     }
 }

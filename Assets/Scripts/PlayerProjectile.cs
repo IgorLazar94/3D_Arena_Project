@@ -12,7 +12,7 @@ public class PlayerProjectile : MonoBehaviour
     private void Start()
     {
         isReadyForDoubleKill = false;
-        Invoke("DestroyProjectile", 5.0f);
+        Invoke("DisableProjectile", 5.0f);
         bulletBody = gameObject.GetComponent<Rigidbody>();
     }
 
@@ -42,14 +42,14 @@ public class PlayerProjectile : MonoBehaviour
             }
             else
             {
-                DestroyProjectile();
+                DisableProjectile();
             }
         }
     }
 
-    public void DestroyProjectile()
+    public void DisableProjectile()
     {
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     public void ChooseRandomDirection()

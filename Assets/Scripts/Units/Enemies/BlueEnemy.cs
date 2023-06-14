@@ -46,7 +46,7 @@ public class BlueEnemy : GenericEnemy
             }
             else
             {
-                bulletScript.DestroyProjectile();
+                bulletScript.DisableProjectile();
             }
         }
     }
